@@ -4,6 +4,7 @@
  */
 public class SudokuPTUI {
     public static void main(String[] args) {
-        System.out.println("Adding Project to Git");
+        System.out.println("Adding Project to GitHub");
+        System.out.println("Testing pushing to GitHub");
     }
 }
