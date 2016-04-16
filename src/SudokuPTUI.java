@@ -6,5 +6,6 @@ public class SudokuPTUI {
     public static void main(String[] args) {
         System.out.println("Adding Project to GitHub");
         System.out.println("Testing pushing to GitHub");
+        System.out.println("Can I push to tyler's GitHub?");
     }
 }
