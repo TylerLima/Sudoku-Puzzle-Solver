@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.Scanner;
 
 /**
@@ -11,6 +12,8 @@ public class SudokuPTUI {
 
     /** The puzzle grid that will store of the numbers */
     char[][] puzzleGrid;
+    /** The cursor that keeps track of the position within the grid */
+    int[] cursor;
 
     /**
      * The constructor which is created from an input file
@@ -29,6 +32,9 @@ public class SudokuPTUI {
                 puzzleGrid[row][col]= in.next().charAt(0);
             }
         }
+
+        // Initialize other variables
+        cursor= new int[]{0,0};
     }
 
     /**
@@ -38,6 +44,67 @@ public class SudokuPTUI {
     public SudokuPTUI(SudokuPTUI parent){
         // Copy over the data in the parent SudokuPTUI
         System.arraycopy(parent.puzzleGrid, 0, this.puzzleGrid, 0, parent.puzzleGrid.length);
+        System.arraycopy(parent.cursor, 0, this.cursor, 0, parent.cursor.length);
+    }
+
+    /**
+     * Creates the successors of the current SudokuPTUI
+     * @return a collection of the next successors
+     */
+    public Collection<SudokuPTUI> getSuccessors(){
+        return null;
+    }
+
+    /**
+     * Validates whether the current SudokuPTUI follows the rules of Sudoku or not
+     * @return boolean value depending on if the SudokuPTUI is follows the rules of Sudoku
+     */
+    public boolean validate(){
+        // Get the number that was just placed
+        char mostRecent= puzzleGrid[cursor[0]][cursor[1]];
+
+        // Check that the row does not already have the number just placed
+        for(int col= 0; col < puzzleGrid[0].length; col++){
+            if(col != cursor[1] && puzzleGrid[cursor[0]][col] == mostRecent)
+                return false;
+        }
+
+        // Check that the col does not already have the number just placed
+        for(int row= 0; row < puzzleGrid.length; row++){
+            if(row != cursor[0] && puzzleGrid[row][cursor[1]] == mostRecent)
+                return false;
+        }
+
+        /** Check that the 3x3 grid does not already have the number just placed */
+
+        // Find out the row the 3x3 grid starts on
+        int minRow= cursor[0];
+        while(minRow % 3 != 0)
+            minRow--;
+
+        // Find out the column the 3x3 grid starts on
+        int minCol= cursor[1];
+        while(minCol % 3 != 0)
+            minCol--;
+
+        // Check each number in the 3x3 grid for the number just placed
+        for(int row= minRow; row <= minRow+ 2; row++){
+            for(int col= minCol; col <= minCol+ 2; col++){
+                // If the row/col combo isn't on the current cursor position and the number was found
+                if(!(row == cursor[0] && col == cursor[1]) && puzzleGrid[row][col] == mostRecent)
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Finds if the current SudokuPTUI is a solution to the puzzle
+     * @return boolean value depending on if the SudokuPTUI is a solution or not
+     */
+    public boolean isGoal(){
+        return true;
     }
 
     /**
