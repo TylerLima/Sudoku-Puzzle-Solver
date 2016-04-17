@@ -12,6 +12,11 @@ public class SudokuPTUI {
     /** The puzzle grid that will store of the numbers */
     char[][] puzzleGrid;
 
+    /**
+     * The constructor which is created from an input file
+     * @param filename the name of the file with the layout for the SudokuPTUI
+     * @throws FileNotFoundException
+     */
     public SudokuPTUI(String filename) throws FileNotFoundException {
         Scanner in= new Scanner(new File(filename));
 
@@ -24,6 +29,10 @@ public class SudokuPTUI {
         }
     }
 
+    /**
+     * The constructor for backtracking
+     * @param parent the parent SudokuPTUI layout
+     */
     public SudokuPTUI(SudokuPTUI parent){
         System.arraycopy(parent.puzzleGrid, 0, this.puzzleGrid, 0, parent.puzzleGrid.length);
     }
@@ -57,6 +66,12 @@ public class SudokuPTUI {
         return grid;
     }
 
+    /**
+     * Main function for the file
+     * Creates a puzzle from an input file
+     * @param args user provided file
+     * @throws FileNotFoundException
+     */
     public static void main(String[] args) throws FileNotFoundException {
         SudokuPTUI puzzle= new SudokuPTUI(args[0]);
         System.out.println(puzzle.toString());
