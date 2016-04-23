@@ -43,9 +43,14 @@ public class SudokuPTUI {
      * @param parent the parent SudokuPTUI layout
      */
     public SudokuPTUI(SudokuPTUI parent){
+        // Initialize the puzzleGrid and cursor
+        puzzleGrid = new char[9][9];
+        cursor= new int[2];
+
         // Copy over the data in the parent SudokuPTUI
-        System.arraycopy(parent.puzzleGrid, 0, this.puzzleGrid, 0, parent.puzzleGrid.length);
-        System.arraycopy(parent.cursor, 0, this.cursor, 0, parent.cursor.length);
+        for(int row= 0; row < this.puzzleGrid.length; row++){
+            System.arraycopy(parent.puzzleGrid[row], 0, this.puzzleGrid[row], 0, parent.puzzleGrid[row].length);
+        }
     }
 
     public int[] cursor_helper(int[] cursor){
@@ -66,7 +71,7 @@ public class SudokuPTUI {
     public Collection<SudokuPTUI> getSuccessors(){
         Collection<SudokuPTUI> possibleSuccessors = new ArrayList<>();
 
-        if(puzzleGrid[cursor[0]][cursor[1]] != ' '){
+        if(puzzleGrid[cursor[0]][cursor[1]] != '-'){
             SudokuPTUI child = new SudokuPTUI(this);
             child.puzzleGrid[cursor[0]][cursor[1]] = this.puzzleGrid[cursor[0]][cursor[1]];
             child.cursor = cursor_helper(this.cursor);
@@ -75,7 +80,7 @@ public class SudokuPTUI {
         else{
             for(int i = 1; i <= 9; i++){
                 SudokuPTUI child = new SudokuPTUI(this);
-                child.puzzleGrid[cursor[0]][cursor[1]] = (char) i;
+                child.puzzleGrid[cursor[0]][cursor[1]] = Character.forDigit(i, 10);
                 child.cursor = cursor_helper(this.cursor);
                 possibleSuccessors.add(child);
             }
@@ -136,7 +141,7 @@ public class SudokuPTUI {
         for(int row= 0; row < puzzleGrid.length; row++){
             for(int col= 0; col < puzzleGrid[0].length; col++){
                 // If a blank space is found, then the puzzle is incomplete
-                if(puzzleGrid[row][col] == ' ')
+                if(puzzleGrid[row][col] == '-')
                     return false;
             }
         }
