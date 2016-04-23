@@ -134,10 +134,10 @@ public class SudokuPTUI {
      * @return boolean value depending on if the SudokuPTUI is a solution or not
      */
     public boolean isGoal() {
-        int[] number_list = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        ArrayList<Integer> number_list = new ArrayList<>();
         ArrayList<Integer> number_list_copy = new ArrayList<>();
         for (int i = 1; i <= 9; i++) {
-            number_list_copy.add(i);
+            number_list.add(i);
         }
 
         for (int row = 0; row < puzzleGrid.length; row++) {
