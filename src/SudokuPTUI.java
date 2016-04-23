@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -132,10 +133,39 @@ public class SudokuPTUI {
      * Finds if the current SudokuPTUI is a solution to the puzzle
      * @return boolean value depending on if the SudokuPTUI is a solution or not
      */
-    public boolean isGoal(){
-        return true;
-    }
+    public boolean isGoal() {
+        int[] number_list = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+        ArrayList<Integer> number_list_copy = new ArrayList<>();
+        for (int i = 1; i <= 9; i++) {
+            number_list_copy.add(i);
+        }
 
+        for (int row = 0; row < puzzleGrid.length; row++) {
+            for (int col = 0; col < puzzleGrid[0].length; col++) {
+                System.arraycopy(number_list, 0, number_list_copy, 0, 9);
+                for (int i = 0; i < puzzleGrid.length; i++) {
+                    if (i == puzzleGrid[row][col]) {
+                        number_list_copy.remove(new Integer(i));
+                    } else {
+                        return false; //couldn't find the i integer within the this particular row
+                    }
+                }
+            }
+        }
+
+        for (int col = 0; col < puzzleGrid.length; col++) {
+            for (int row = 0; row < puzzleGrid[0].length; row++) {
+                System.arraycopy(number_list, 0, number_list_copy, 0, 9);
+                for (int i = 0; i < puzzleGrid.length; i++) {
+                    if (i == puzzleGrid[row][col]) {
+                        number_list_copy.remove(new Integer(i));
+                    } else {
+                        return false; //couldn't find the i integer within the this particular column
+                    }
+                }
+            }
+        }return true;
+    }
     /**
      * Converts the puzzleGrid into a string for the user to visualize
      * @return A string representation of the SudokuPTUI
