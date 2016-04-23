@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -59,7 +58,6 @@ public class SudokuPTUI {
         }
         return new_cursor;
     }
-
 
     /**
      * Creates the successors of the current SudokuPTUI
@@ -134,38 +132,19 @@ public class SudokuPTUI {
      * @return boolean value depending on if the SudokuPTUI is a solution or not
      */
     public boolean isGoal() {
-        ArrayList<Integer> number_list = new ArrayList<>();
-        ArrayList<Integer> number_list_copy = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            number_list.add(i);
-        }
-
-        for (int row = 0; row < puzzleGrid.length; row++) {
-            for (int col = 0; col < puzzleGrid[0].length; col++) {
-                System.arraycopy(number_list, 0, number_list_copy, 0, 9);
-                for (int i = 0; i < puzzleGrid.length; i++) {
-                    if (i == puzzleGrid[row][col]) {
-                        number_list_copy.remove(new Integer(i));
-                    } else {
-                        return false; //couldn't find the i integer within the this particular row
-                    }
-                }
+        // Check each square in the grid for a blank space
+        for(int row= 0; row < puzzleGrid.length; row++){
+            for(int col= 0; col < puzzleGrid[0].length; col++){
+                // If a blank space is found, then the puzzle is incomplete
+                if(puzzleGrid[row][col] == ' ')
+                    return false;
             }
         }
 
-        for (int col = 0; col < puzzleGrid.length; col++) {
-            for (int row = 0; row < puzzleGrid[0].length; row++) {
-                System.arraycopy(number_list, 0, number_list_copy, 0, 9);
-                for (int i = 0; i < puzzleGrid.length; i++) {
-                    if (i == puzzleGrid[row][col]) {
-                        number_list_copy.remove(new Integer(i));
-                    } else {
-                        return false; //couldn't find the i integer within the this particular column
-                    }
-                }
-            }
-        }return true;
+        // If no blank space was found, the puzzle was filled out correctly
+        return true;
     }
+
     /**
      * Converts the puzzleGrid into a string for the user to visualize
      * @return A string representation of the SudokuPTUI
