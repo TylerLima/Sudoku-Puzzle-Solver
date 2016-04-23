@@ -23,7 +23,7 @@ public class BackTracker {
         }else{ // If the puzzle has yet to be solved
             for(SudokuPTUI newGrid : grid.getSuccessors()){
                 // If the grid does not break the rules of Sudoku
-                if(grid.validate()){
+                if(newGrid.validate()){
                     SudokuPTUI solution= solvePuzzle(newGrid);
                     // If a solution was found down this recursive path
                     if(solution != null)
