@@ -47,7 +47,14 @@ public class BackTracker {
         System.out.println("Puzzle at the start:\n");
         System.out.println(grid+ "\n");
         BackTracker backtracker= new BackTracker();
+
+        // Time at which the puzzle started
+        double start= System.currentTimeMillis();
+
         System.out.println("Completed Puzzle:\n");
         System.out.println(backtracker.solvePuzzle(grid));
+
+        // Total time it took the puzzle to complete
+        System.out.println("Elapsed time: "+ (System.currentTimeMillis() -start)/1000.0+ " seconds.");
     }
 }
