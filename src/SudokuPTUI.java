@@ -35,7 +35,7 @@ public class SudokuPTUI {
         }
 
         // Initialize other variables
-        cursor= new int[]{0,0};
+        cursor= new int[]{0,-1};
     }
 
     /**
@@ -57,7 +57,7 @@ public class SudokuPTUI {
         int[] new_cursor = new int[2];
         System.arraycopy(cursor, 0, new_cursor, 0, 2);
         new_cursor[1] += 1;
-        if(new_cursor[1] == 8) {
+        if(new_cursor[1] == 9) {
             new_cursor[1] = 0;
             new_cursor[0] += 1;
         }
@@ -71,17 +71,20 @@ public class SudokuPTUI {
     public Collection<SudokuPTUI> getSuccessors(){
         Collection<SudokuPTUI> possibleSuccessors = new ArrayList<>();
 
-        if(puzzleGrid[cursor[0]][cursor[1]] != '-'){
+        // Get the new position to place a number at
+        int[] newCursor= cursor_helper(this.cursor);
+
+        if(puzzleGrid[newCursor[0]][newCursor[1]] != '-'){
             SudokuPTUI child = new SudokuPTUI(this);
-            child.puzzleGrid[cursor[0]][cursor[1]] = this.puzzleGrid[cursor[0]][cursor[1]];
-            child.cursor = cursor_helper(this.cursor);
+            child.puzzleGrid[newCursor[0]][newCursor[1]] = this.puzzleGrid[newCursor[0]][newCursor[1]];
+            child.cursor = newCursor;
             possibleSuccessors.add(child);
         }
         else{
             for(int i = 1; i <= 9; i++){
                 SudokuPTUI child = new SudokuPTUI(this);
-                child.puzzleGrid[cursor[0]][cursor[1]] = Character.forDigit(i, 10);
-                child.cursor = cursor_helper(this.cursor);
+                child.puzzleGrid[newCursor[0]][newCursor[1]] = Character.forDigit(i, 10);
+                child.cursor = newCursor;
                 possibleSuccessors.add(child);
             }
         }
