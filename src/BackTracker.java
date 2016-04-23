@@ -44,10 +44,10 @@ public class BackTracker {
      */
     public static void main(String[] args) throws FileNotFoundException{
         SudokuPTUI grid= new SudokuPTUI(args[0]);
-        System.out.println("Puzzle at the start:");
-        System.out.println(grid);
+        System.out.println("Puzzle at the start:\n");
+        System.out.println(grid+ "\n");
         BackTracker backtracker= new BackTracker();
-        System.out.println("Completed Puzzle:");
+        System.out.println("Completed Puzzle:\n");
         System.out.println(backtracker.solvePuzzle(grid));
     }
 }
