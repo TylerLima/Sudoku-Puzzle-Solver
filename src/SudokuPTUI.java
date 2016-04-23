@@ -11,9 +11,9 @@ import java.util.Scanner;
 public class SudokuPTUI {
 
     /** The puzzle grid that will store of the numbers */
-    char[][] puzzleGrid;
+    private char[][] puzzleGrid;
     /** The cursor that keeps track of the position within the grid */
-    int[] cursor;
+    private int[] cursor;
 
     /**
      * The constructor which is created from an input file
