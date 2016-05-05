@@ -1,15 +1,13 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The Sudoku plain text user interface
  * @author Tyler 4/16/2016.
  * @author Michael 4/16/2016
  */
-public class SudokuPTUI {
+public class SudokuPTUI implements Observer {
 
     /** The puzzle grid that will store of the numbers */
     private char[][] puzzleGrid;
@@ -198,5 +196,10 @@ public class SudokuPTUI {
     public static void main(String[] args) throws FileNotFoundException {
         SudokuPTUI puzzle = new SudokuPTUI(args[0]);
         System.out.println(puzzle.toString());
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
