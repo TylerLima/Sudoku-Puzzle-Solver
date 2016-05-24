@@ -43,7 +43,7 @@ public class SudokuPTUI implements Observer {
     public SudokuPTUI(SudokuPTUI parent){
         // Initialize the puzzleGrid and cursor
         puzzleGrid = new char[9][9];
-        cursor= new int[2];
+        cursor = new int[2];
 
         // Copy over the data in the parent SudokuPTUI
         for(int row= 0; row < this.puzzleGrid.length; row++){
