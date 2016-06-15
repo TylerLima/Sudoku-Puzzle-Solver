@@ -23,6 +23,8 @@ import javafx.util.Pair;
  * Created by tyler on 5/4/2016.
  *
  */
+
+
 public class SudokuGraphicalVC extends Application implements Observer {
 
     /**variable determining top padding of tiles*/
@@ -76,7 +78,7 @@ public class SudokuGraphicalVC extends Application implements Observer {
                 //button.setBackground(background);
 
                 //sets the action event handler to place the current number variable on sudoku board
-                //gridTile.setOnAction(event -> {model.add(final_row, final_col);
+                gridTile.setOnAction(event -> {});
 
                 //Adds each button made for the puzzle to the the grid pane (called puzzleGrid)
                 puzzleGrid.add(gridTile, final_row, final_col);
