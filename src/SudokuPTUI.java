@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class SudokuPTUI implements Observer {
 
-    /** The puzzle grid that will store of the numbers */
+    /** The puzzle grid that will store all of the numbers */
     private char[][] puzzleGrid;
     /** The cursor that keeps track of the position within the grid */
     private int[] cursor;
